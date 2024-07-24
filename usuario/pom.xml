@@ -98,6 +98,12 @@
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
 
+		<!--Para que se ha un cliente de eureka cliente-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
 		<!-- Unirest for HTTP requests, para hacer peticiones http -->
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>

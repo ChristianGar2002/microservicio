@@ -1,5 +1,10 @@
 server:
   port: 8001
+security:
+  jwt:
+    secret: chris12345
+    issuer: Main
+    ttlMillis: 604800000
 eureka:
   client:
     fetch-registry: true #Con esto indicamos que se van a registrar en el servidor eureka
