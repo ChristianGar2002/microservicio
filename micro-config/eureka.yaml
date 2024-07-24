@@ -1,0 +1,6 @@
+server:
+  port: 8761
+eureka:
+  client:
+    fetch-registry: false #Se pone esto para que eureka no se registre asi misma, ya que tiene que registrar a los demas
+    register-with-eureka: false #Con este indicamos que no es un cliente

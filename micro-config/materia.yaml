@@ -1,2 +1,10 @@
 server:
   port: 8003
+eureka:
+  client:
+    fetch-registry: true #Con esto indicamos que se van a registrar en el servidor eureka
+    register-with-eureka: true #Y que este es un cliente de eureka
+    service-url:
+      default-zone: http://localhost:8761/eureka
+    instance:
+      hostname: localhost
