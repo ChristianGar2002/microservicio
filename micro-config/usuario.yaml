@@ -1,7 +1,2 @@
 server:
   port: 8001
-security:
-  jwt:
-    secret: chris12345
-    issuer: Main
-    ttlMillis: 604800000

@@ -1,4 +1,8 @@
 spring:
+  resources: #Para eliminar el cache del navegado en cuestion de la imagenes, se debe colocar al inicio
+    cache:
+      cache-control:
+        no-store: true
   application:
     name: usuario
   cloud:
