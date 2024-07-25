@@ -21,11 +21,11 @@ spring:
           predicates:
             - Path=/usuario/**
         - id: materia
-          uri: lb://materias
+          uri: lb://materia
           predicates:
-            - Path=/materias/**
+            - Path=/materias/** #Se coloca aqui el request mapping
         - id: grupo
-          uri: lb://grupos #lb valanceo de carga agarra la mejor instancia
+          uri: lb://grupo #lb valanceo de carga agarra la mejor instancia
           predicates:
             - Path=/grupos/**
         - id: horario
