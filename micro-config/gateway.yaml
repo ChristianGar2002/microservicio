@@ -14,20 +14,20 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: true #Cuando está activado, el enrutador puede descubrir automáticamente los servicios registrado
       routes:
         - id: usuario
           uri: lb://usuario
           predicates:
             - Path=/usuario/**
         - id: materia
-          uri: lb://materia
+          uri: lb://materias
           predicates:
-            - Path=/materia/**
+            - Path=/materias/**
         - id: grupo
-          uri: lb://grupo #lb valanceo de carga agarra la mejor instancia
+          uri: lb://grupos #lb valanceo de carga agarra la mejor instancia
           predicates:
-            - Path=/grupo/**
+            - Path=/grupos/**
         - id: horario
           uri: lb://horario #lb valanceo de carga agarra la mejor instancia
           predicates:
