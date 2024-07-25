@@ -6,6 +6,7 @@ import com.usuario.modelos.Grupos;
 import com.usuario.modelos.Horario;
 import com.usuario.modelos.Materias;
 import com.usuario.services.UsuarioService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
@@ -123,6 +124,7 @@ public class UsuarioApi {
         return ResponseEntity.ok("El usuario ha sido eliminado");
     }
 
+    @CircuitBreaker(name = "gruposCB", fallbackMethod = "fallbackobtenerGrupos")
     @GetMapping("/lista_grupos/{id_profesor}")
     public ResponseEntity<List<Grupos>> obtenerGrupos(@RequestHeader(value = "Authorization") String token, @PathVariable("id_profesor") int id_profesor){
 
@@ -136,6 +138,7 @@ public class UsuarioApi {
         return ResponseEntity.ok(usuarioService.getGrupos(id_profesor));
     }
 
+    @CircuitBreaker(name = "materiasCB", fallbackMethod = "fallbackobtenerMaterias")
     @GetMapping("/lista_materias/{id_profesor}")
     public ResponseEntity<List<Materias>> obtenerMaterias(@RequestHeader(value = "Authorization") String token, @PathVariable("id_profesor") int id_profesor){
 
@@ -149,6 +152,7 @@ public class UsuarioApi {
         return ResponseEntity.ok(usuarioService.materiasProfe(id_profesor));
     }
 
+    @CircuitBreaker(name = "horariosCB", fallbackMethod = "fallbackobtenerHorario")
     @GetMapping("/lista_horario/{id_profesor}")
     public ResponseEntity<List<Horario>> obtenerHorario(@RequestHeader(value = "Authorization") String token, @PathVariable("id_profesor") int id_profesor){
 
@@ -162,6 +166,7 @@ public class UsuarioApi {
         return ResponseEntity.ok(usuarioService.horariosProfe(id_profesor));
     }
 
+    @CircuitBreaker(name = "todaCB", fallbackMethod = "fallbackobtenerTodos")
     @GetMapping("/toda_informacion/{id_profesor}")
     public ResponseEntity<Map<String, Object>> obtenerTodos(@RequestHeader(value = "Authorization") String token,@PathVariable("id_profesor") int id_profesor){
 
@@ -188,6 +193,26 @@ public class UsuarioApi {
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG) // Ajusta el tipo de contenido según tus imágenes
                 .body(new InputStreamResource(new FileInputStream(imgFile)));//Es un flujo de entrada para que se pueda obtener los bytes de la imagen que esta en la ruta de images
+    }
+
+    private ResponseEntity<List<Grupos>> fallbackobtenerGrupos(@PathVariable("id_profesor") int id_profesor, RuntimeException exception){//Si no se puede acceder al microservicio carro sucedaedara esto
+
+        return new ResponseEntity("Los grupos del profesor: " + id_profesor + " no pueden ser mostrados en este momento", HttpStatus.ACCEPTED);
+    }
+
+    private ResponseEntity<List<Materias>> fallbackobtenerMaterias(@PathVariable("id_profesor") int id_profesor, RuntimeException exception){//Si no se puede acceder al microservicio carro sucedaedara esto
+
+        return new ResponseEntity("Las materias del profesor: " + id_profesor + " no pueden ser mostradas en este momento", HttpStatus.ACCEPTED);
+    }
+
+    private ResponseEntity<List<Horario>> fallbackobtenerHorario(@PathVariable("id_profesor") int id_profesor, RuntimeException exception){//Si no se puede acceder al microservicio carro sucedaedara esto
+
+        return new ResponseEntity("Los horarios del profesor: " + id_profesor + " no pueden ser mostrados en este momento", HttpStatus.ACCEPTED);
+    }
+
+    private ResponseEntity<Map<String, Object>> fallbackobtenerTodos(@PathVariable("id_profesor") int id_profesor, RuntimeException exception){//Si no se puede acceder al microservicio carro sucedaedara esto
+
+        return new ResponseEntity("Los datos del profesor: " + id_profesor + " no pueden ser mostrados en este momento", HttpStatus.ACCEPTED);
     }
 
     //Para validar el token
