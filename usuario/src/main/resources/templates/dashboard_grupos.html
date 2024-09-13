@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Grupos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .table-responsive {
+            margin-bottom: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Dashboard</a>
+</nav>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Usuario: <span th:text="${username}"></span>
+        </div>
+        <div class="card-body">
+            <h4>Grupos</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre del Grupo</th>
+                        <th>Número de Estudiantes</th>
+                        <th>Profesor ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="grupo: ${lista_grupos}">
+                        <td th:text="${grupo.id}"></td>
+                        <td th:text="${grupo.nombre_grupo}"></td>
+                        <td th:text="${grupo.numero_estudiantes}"></td>
+                        <td th:text="${grupo.usuarioid}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="/usuario/dashboard" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

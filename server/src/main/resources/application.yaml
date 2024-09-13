@@ -1,0 +1,13 @@
+#Este proyecto es un servidor el cual traera la configuracion de los de mas microservicios o se ha los clientes de un repositorio de github
+server:
+  port: 8081
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          default-label: master #La rama donde esta la configuracion de los clientes(Proyectos)
+          uri: https://github.com/ChristianGar2002/microservicio
+          search-paths: micro-config #La carpeta donde estan los archivos de configuracion
+  application:
+    name: server

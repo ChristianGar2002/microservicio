@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesion</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        form{
+        padding:25px;
+        }
+        .main-section{
+            margin:0 auto;
+            margin-top: 30%;
+            padding: 0;
+        }
+        .form-group input{
+        margin-top: 28px;
+        }
+        .modal-content{
+
+        background-color: #00C7C7;
+
+        }
+        body{
+
+           background: #ADA996;  /* fallback for old browsers */
+           background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+           background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="modal-dialog text-center">
+    <div class="col-sm-8 main-section">
+        <div class="modal-content">
+            <form th:object="${usuario}" method="POST" action="/usuario/login" class="col-12">
+                <h3 class="text-center text-white">Iniciar sesión</h3>
+                <div class="form-group" id="user-group">
+                    <input type="text" class="form-control" placeholder="Nombre de usuario" name="username" th:field="*{username}" required autofocus>
+                </div>
+                <div class="form-group" id="contrasena-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" name="contrasena" th:field="*{contrasena}" required>
+                </div>
+                <button type="submit" class="btn btn-primary" name="login_user" style="width: 180px;"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+            </form>
+            <!--<button type='button' class='btn' data-toggle="modal" data-target="#RecuperarModal" style="width: 250px; background-color: transparent;color: white; margin-bottom: 0px; margin-left: auto;margin-right: auto;"><b>Recordar contraseña</b></button>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

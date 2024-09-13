@@ -1,0 +1,39 @@
+spring:
+  resources: #Para eliminar el cache del navegado en cuestion de la imagenes, se debe colocar al inicio
+    cache:
+      cache-control:
+        no-store: true
+  application:
+    name: usuario
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
+  # Configuraciones de la base de datos
+  datasource:
+    url: jdbc:mysql://localhost:3306/escuela_profe
+    username: root
+    # spring.datasource.password=root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configuraciones de JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+#JWT
+
+#Esta va hacer esa palabra secreta que le indica que va a utilizar para generar el codigo encryptado
+#security.jwt.secret=chris12345
+#Quien fue el servicio que creo esta sesion
+#security.jwt.issuer=Main
+#Formula para obtener las horas
+#security.jwt.ttlMillis=hours = 3600000
+#La caducidad de la sesion en este caso una semana
+#security.jwt.ttlMillis=604800000
+
+#Es decir que si queremos que la sesion dure una semana seria
+#7 dias de la semana multiplicado por 24 horas del dia multiplicado por 3600000
+#7 * 24 = 168 * 3600000 = 604800000

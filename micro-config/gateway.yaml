@@ -1,0 +1,34 @@
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: true #Con esto indicamos que se van a registrar en el servidor eureka, port: ${PORT:${SERVER_PORT:0}} ES PARA QUE ME DE UN PUERTO EL PRIMERO QUE ENCUENTRE
+    register-with-eureka: true #Y que este es un cliente de eureka
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+#Estas son las configuraciones del gateway de la puerta de enlace, para acceder a los microservicios
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #Cuando está activado, el enrutador puede descubrir automáticamente los servicios registrado
+      routes:
+        - id: usuario
+          uri: lb://usuario
+          predicates:
+            - Path=/usuario/**
+        - id: materia
+          uri: lb://materia
+          predicates:
+            - Path=/materias/** #Se coloca aqui el request mapping
+        - id: grupo
+          uri: lb://grupo #lb valanceo de carga agarra la mejor instancia
+          predicates:
+            - Path=/grupos/**
+        - id: horario
+          uri: lb://horario #lb valanceo de carga agarra la mejor instancia
+          predicates:
+            - Path=/horario/**
